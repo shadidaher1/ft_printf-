@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_decimal.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sdaher <sdaher@student.42beirut.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/12 12:28:18 by sdaher            #+#    #+#             */
+/*   Updated: 2025/12/12 12:42:19 by sdaher           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int ft_printf_char(char c);
+int	ft_printf_char(char c);
 
-static int count_digits(long long n)
+static int	count_digits(long long n)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (n == 0)
@@ -17,10 +29,10 @@ static int count_digits(long long n)
 	return (count);
 }
 
-int ft_printf_decimal(int n)
+int	ft_printf_decimal(int n)
 {
-	int count;
-	long long num;
+	int			count;
+	long long	num;
 
 	num = n;
 	count = count_digits(num);

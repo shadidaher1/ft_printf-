@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sdaher <sdaher@student.42beirut.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/12 12:28:31 by sdaher            #+#    #+#             */
+/*   Updated: 2025/12/12 12:37:58 by sdaher           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include <stdio.h>
 
-int ft_printf_char(char c);
-int ft_printf_string(char *str);
-int ft_printf_decimal(int n);
-int ft_printf_unsigned(unsigned int n);
-int ft_printf_hex_low(unsigned int n);
-int ft_printf_hex_cap(unsigned int n);
-int ft_printf_pointer(void *ptr);
+int	ft_printf_char(char c);
+int	ft_printf_string(char *str);
+int	ft_printf_decimal(int n);
+int	ft_printf_unsigned(unsigned int n);
+int	ft_printf_hex_low(unsigned int n);
+int	ft_printf_hex_cap(unsigned int n);
+int	ft_printf_pointer(void *ptr);
 
-int check(va_list lst, char str)
+int	check(va_list lst, char str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str == 'c')
@@ -31,13 +43,22 @@ int check(va_list lst, char str)
 	return (i);
 }
 
-int ft_printf(const char *str, ...)
+int	check_0(char str)
 {
-	va_list lst;
-	va_start(lst, str);
-	int i;
-	int len;
+	if (str == 'c' || str == 's' || str == 'p'
+		|| str == 'd' || str == 'i' || str == 'u'
+		|| str == 'x' || str == 'X')
+		return (1);
+	return (0);
+}
 
+int	ft_printf(const char *str, ...)
+{
+	va_list	lst;
+	int		i;
+	int		len;
+
+	va_start(lst, str);
 	if (!str)
 		return (-1);
 	i = 0;
@@ -47,14 +68,8 @@ int ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			i++;
-			// if (strchr("cspdiuxX", str[i]))
-			if (str[i] == 'c' || str[i] == 's' || str[i] == 'p' ||
-				str[i] == 'd' || str[i] == 'i' || str[i] == 'u' ||
-				str[i] == 'x' || str[i] == 'X')
-			{
-
+			if (check_0(str[i]))
 				len += check(lst, str[i]);
-			}
 			else if (str[i] == '%')
 				len += ft_printf_char('%');
 		}
